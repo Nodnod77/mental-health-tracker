@@ -9,3 +9,7 @@ class MoodEntry(models.Model):
     feelings = models.TextField()
     mood_intensity = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    @property
+    def is_mood_strong(self):
+        return self.mood_intensity >= 7
