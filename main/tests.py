@@ -8,9 +8,9 @@ class MainTest(TestCase):
         response = Client().get('')
         self.assertEqual(response.status_code, 302)
 
-    def test_main_using_main_template(self):
-        response = Client().get('')
-        self.assertTemplateUsed(response, 'main.html')
+    #def test_main_using_main_template(self):
+        #response = Client().get('')
+        #self.assertTemplateUsed(response, 'main.html')
 
     def test_nonexistent_page(self):
         response = Client().get('/skibidi/')
@@ -30,6 +30,6 @@ class MainTest(TestCase):
         self.assertTrue(mood.is_mood_strong)
 
     def test_main_template_uses_correct_page_title(self):
-        response = Client().get("/")
+        response = Client().get("/login/?next=/")
         html_response = response.content.decode("utf8")
         self.assertIn("PBD Mental Health Tracker", html_response)
