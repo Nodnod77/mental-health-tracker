@@ -11,12 +11,12 @@ class ExampleFunctionalTest(unittest.TestCase):
         self.browser.quit()
 
     def test_heading_text_is_correct(self):
-        self.browser.get("http://localhost:8000")
+        self.browser.get("http://localhost:8000") # chnage here for the deployement URL  (but not deployed on pws yet)
         element: WebElement = self.browser.find_element(by=By.TAG_NAME, value="h1")
 
         self.assertEqual("Mental Health Tracker", element.text)
 
     def test_page_title_is_correct(self):
-        self.browser.get("http://localhost:8000")
+        self.browser.get("http://localhost:8000") #change here for the deployement URL (but not deployed on pws yet)
 
         self.assertEqual("PBD Mental Health Tracker", self.browser.title)
