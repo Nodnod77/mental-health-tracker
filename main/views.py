@@ -19,7 +19,7 @@ def show_main(request):
         'name': request.user.username,
         'class': 'PBP E',
         'mood_entries': mood_entries,
-        'last_login': request.COOKIES['last_login'],
+        'last_login': request.COOKIES.get('last_login', 'Never') ,
     }
     return render(request, "main.html", context)
 
