@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect   
+from django.shortcuts import render, redirect ,reverse  
 from main.forms import MoodEntryForm
 from main.models import MoodEntry
-from django.http import HttpResponse , HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseRedirect
 from django.core import serializers
 from django.contrib.auth.forms import UserCreationForm , AuthenticationForm
 from django.contrib.auth import authenticate, login , logout
@@ -84,3 +84,26 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def edit_mood(request, id):
+    # Get mood entry based on id
+    mood = MoodEntry.objects.get(pk = id)
+
+    # Set mood entry as an instance of the form
+    form = MoodEntryForm(request.POST or None, instance=mood)
+
+    if form.is_valid() and request.method == "POST":
+        # Save form and return to home page
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_mood.html", context)
+
+def delete_mood(request, id):
+    # Get mood based on id
+    mood = MoodEntry.objects.get(pk = id)
+    # Delete mood
+    mood.delete()
+    # Return to home page
+    return HttpResponseRedirect(reverse('main:show_main'))

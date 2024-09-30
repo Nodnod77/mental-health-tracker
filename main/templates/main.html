@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% include 'navbar.html' %}
 <h1>Mental Health Tracker</h1>
 
 <h5>NPM: </h5>
@@ -30,6 +31,20 @@
     <td>{{mood_entry.time}}</td>
     <td>{{mood_entry.feelings}}</td>
     <td>{{mood_entry.mood_intensity}}</td>
+    <td>
+      <a href="{% url 'main:edit_mood' mood_entry.pk %}">
+          <button>
+              Edit
+          </button>
+      </a>
+  </td>
+  <td>
+    <a href="{% url 'main:delete_mood' mood_entry.pk %}">
+        <button>
+            Delete
+        </button>
+    </a>
+  </td>
   </tr>
   {% endfor %}
 </table>
